@@ -9,6 +9,8 @@
 #import "GestureLockView.h"
 #import "GestureView.h"
 #import "GuestureEchoView.h"
+#import "BackButton.h"
+
 @interface GestureLockView()
 
 @property(nonatomic,assign)CGPoint currentPoint;
@@ -23,6 +25,10 @@
 
 @property(nonatomic,strong)GuestureEchoView *guesEchoView;
 
+@property(nonatomic,strong)BackButton *backButton;
+
+@property(nonatomic,strong)UILabel *alertTitle;
+
 @end
 
 
@@ -33,14 +39,17 @@
     
     if (self == [super initWithFrame:frame]) {
      
-        self.backgroundColor = UIColor.redColor;
+        self.backgroundColor = UIColor.whiteColor;
         [self initSubviews];
     }
     return self;
     
 }
 
+
 -(void)initSubviews{
+    
+    self.userInteractionEnabled = YES;
     
     UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];
     
@@ -58,6 +67,11 @@
     
     [self addSubview:self.guesEchoView];
     
+    
+    [self addSubview:self.backButton];
+    
+    
+    [self addSubview:self.alertTitle];
     
 }
 
@@ -138,8 +152,6 @@
         }
 
         GestureView *gestureView = self.viewList[i];
-//        gestureView.layer.masksToBounds = YES;
-//        gestureView.layer.cornerRadius = w/2;
         gestureView.frame = CGRectMake(x, y, w, h);
     }
     
@@ -264,15 +276,47 @@
         
         _guesEchoView = [[GuestureEchoView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
         
-        [_guesEchoView setCenter:CGPointMake(self.center.x, self.center.y/2)];
+        [_guesEchoView setCenter:CGPointMake(self.center.x, self.center.y/5*2)];
     }
     return _guesEchoView;
     
 }
 
--(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-
-
+- (BackButton *)backButton{
+    
+    if (!_backButton) {
+        
+        _backButton = [[BackButton alloc] initWithFrame:CGRectMake(30, self.center.y/6, 28, 28)];
+        [_backButton addTarget:self action:@selector(backButtonClick) forControlEvents:UIControlEventTouchUpInside];
+    }
+    
+    return _backButton;
+    
+    
 }
+
+- (UILabel *)alertTitle{
+    
+    
+    if (!_alertTitle) {
+        _alertTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 40)];
+        _alertTitle.textAlignment = NSTextAlignmentCenter;
+        _alertTitle.text = @"绘制解锁图案";
+        _alertTitle.font = [UIFont systemFontOfSize:15];
+        _alertTitle.textColor = UIColor.grayColor;
+        [_alertTitle setCenter:CGPointMake(self.center.x, self.guesEchoView.bounds.size.height + self.guesEchoView.frame.origin.y + 20)];
+    }
+    return _alertTitle;
+}
+
+-(void)backButtonClick{
+    
+    if (_backPage) {
+        
+        _backPage();
+    }
+    
+}
+
 
 @end

@@ -7,13 +7,9 @@
 //
 
 #import "ViewController.h"
-#import "CircleView.h"
-#import "GestureView.h"
-#import "GestureLockView.h"
-#import "GuestureEchoView.h"
+
+#import "GestureViewController.h"
 @interface ViewController ()
-@property(nonatomic,strong)CircleView *tempView;
-@property(nonatomic,strong)GestureView *tempView2;
 @end
 
 @implementation ViewController
@@ -21,19 +17,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    self.view.backgroundColor = [UIColor redColor];
-//    _tempView2 = [[GestureView alloc] initWithFrame:self.view.bounds];
-//    [self.view addSubview:_tempView2];
-    
-    GestureLockView *tempView = [[GestureLockView alloc] initWithFrame:self.view.bounds];
-    
-    [self setValue:tempView forKey:@"view"];
-   
-    
-    
-    // Do any additional setup after loading the view.
+
 }
 
-
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    
+    GestureViewController *vc = [[GestureViewController alloc]init];
+    vc.modalPresentationStyle = UIModalPresentationFullScreen;
+    [self presentViewController:vc animated:YES completion:nil];
+    
+    
+}
 
 @end

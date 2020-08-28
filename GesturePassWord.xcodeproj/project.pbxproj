@@ -17,6 +17,8 @@
 		69F39B5C24F6322200E3C333 /* CircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F39B5B24F6322200E3C333 /* CircleView.m */; };
 		69F39B5F24F641EA00E3C333 /* GestureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F39B5E24F641EA00E3C333 /* GestureView.m */; };
 		69F39BF524F7939400E3C333 /* GuestureEchoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F39BF424F7939400E3C333 /* GuestureEchoView.m */; };
+		69F39C1724F8D56300E3C333 /* GestureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F39C1624F8D56300E3C333 /* GestureViewController.m */; };
+		69F39C1B24F8D68A00E3C333 /* BackButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F39C1A24F8D68A00E3C333 /* BackButton.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +40,10 @@
 		69F39B5E24F641EA00E3C333 /* GestureView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GestureView.m; sourceTree = "<group>"; };
 		69F39BF324F7939400E3C333 /* GuestureEchoView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuestureEchoView.h; sourceTree = "<group>"; };
 		69F39BF424F7939400E3C333 /* GuestureEchoView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GuestureEchoView.m; sourceTree = "<group>"; };
+		69F39C1524F8D56300E3C333 /* GestureViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GestureViewController.h; sourceTree = "<group>"; };
+		69F39C1624F8D56300E3C333 /* GestureViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GestureViewController.m; sourceTree = "<group>"; };
+		69F39C1924F8D68A00E3C333 /* BackButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BackButton.h; sourceTree = "<group>"; };
+		69F39C1A24F8D68A00E3C333 /* BackButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BackButton.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,14 +80,7 @@
 				69A9F7B7245524DE002A658C /* AppDelegate.m */,
 				69A9F7BC245524DE002A658C /* ViewController.h */,
 				69A9F7BD245524DE002A658C /* ViewController.m */,
-				69F39B5424F62E9900E3C333 /* GestureLockView.h */,
-				69F39B5524F62E9900E3C333 /* GestureLockView.m */,
-				69F39BF324F7939400E3C333 /* GuestureEchoView.h */,
-				69F39BF424F7939400E3C333 /* GuestureEchoView.m */,
-				69F39B5D24F641EA00E3C333 /* GestureView.h */,
-				69F39B5E24F641EA00E3C333 /* GestureView.m */,
-				69F39B5A24F6322200E3C333 /* CircleView.h */,
-				69F39B5B24F6322200E3C333 /* CircleView.m */,
+				69F39C1824F8D5F000E3C333 /* GesturePassword */,
 				69A9F7BF245524DE002A658C /* Main.storyboard */,
 				69A9F7C2245524E3002A658C /* Assets.xcassets */,
 				69A9F7C4245524E3002A658C /* LaunchScreen.storyboard */,
@@ -89,6 +88,25 @@
 				69A9F7C8245524E3002A658C /* main.m */,
 			);
 			path = GesturePassWord;
+			sourceTree = "<group>";
+		};
+		69F39C1824F8D5F000E3C333 /* GesturePassword */ = {
+			isa = PBXGroup;
+			children = (
+				69F39C1524F8D56300E3C333 /* GestureViewController.h */,
+				69F39C1624F8D56300E3C333 /* GestureViewController.m */,
+				69F39B5424F62E9900E3C333 /* GestureLockView.h */,
+				69F39B5524F62E9900E3C333 /* GestureLockView.m */,
+				69F39BF324F7939400E3C333 /* GuestureEchoView.h */,
+				69F39BF424F7939400E3C333 /* GuestureEchoView.m */,
+				69F39C1924F8D68A00E3C333 /* BackButton.h */,
+				69F39C1A24F8D68A00E3C333 /* BackButton.m */,
+				69F39B5D24F641EA00E3C333 /* GestureView.h */,
+				69F39B5E24F641EA00E3C333 /* GestureView.m */,
+				69F39B5A24F6322200E3C333 /* CircleView.h */,
+				69F39B5B24F6322200E3C333 /* CircleView.m */,
+			);
+			path = GesturePassword;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -161,10 +179,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69F39C1724F8D56300E3C333 /* GestureViewController.m in Sources */,
 				69F39BF524F7939400E3C333 /* GuestureEchoView.m in Sources */,
 				69F39B5624F62E9900E3C333 /* GestureLockView.m in Sources */,
 				69A9F7BE245524DE002A658C /* ViewController.m in Sources */,
 				69A9F7B8245524DE002A658C /* AppDelegate.m in Sources */,
+				69F39C1B24F8D68A00E3C333 /* BackButton.m in Sources */,
 				69F39B5C24F6322200E3C333 /* CircleView.m in Sources */,
 				69F39B5F24F641EA00E3C333 /* GestureView.m in Sources */,
 				69A9F7C9245524E3002A658C /* main.m in Sources */,

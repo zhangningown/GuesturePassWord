@@ -55,6 +55,15 @@
         [[UIColor whiteColor] set];
     }
     CGContextFillPath(context);
+ 
+}
+
+- (void)layoutSubviews{
+    
+    [super layoutSubviews];
+    
+    self.layer.masksToBounds = YES;
+    self.layer.cornerRadius = self.frame.size.width/2;
     
 }
 

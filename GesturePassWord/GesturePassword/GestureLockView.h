@@ -10,7 +10,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef void(^BackPage)(void);
 @interface GestureLockView : UIView
+
+@property(nonatomic,copy)BackPage backPage;
 
 @end
 
