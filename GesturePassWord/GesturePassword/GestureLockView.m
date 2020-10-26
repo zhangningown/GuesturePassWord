@@ -29,6 +29,11 @@
 
 @property(nonatomic,strong)UILabel *alertTitle;
 
+@property(nonatomic,copy)NSMutableString *verifyPassCode;
+
+@property(nonatomic,copy)NSMutableString *tempVerifyPassCode;
+
+
 @end
 
 
@@ -66,16 +71,17 @@
     
     
     [self addSubview:self.guesEchoView];
-    
-    
     [self addSubview:self.backButton];
-    
-    
     [self addSubview:self.alertTitle];
-    
 }
 
+
+
+
+
 - (void)pan:(UIPanGestureRecognizer *)pan{
+    
+    self.alertTitle.text = @"绘制解锁图案";
     
     _currentPoint = [pan locationInView:self];
     
@@ -85,6 +91,7 @@
         if (CGRectContainsPoint(gestureView.frame, _currentPoint) && gestureView.selectStatus ==  NO) {
                 [gestureView setSelectStatus:YES];
                 [self.selectViewList addObject:gestureView];
+                
         }
     }
 
@@ -95,11 +102,75 @@
         
         if (self.selectViewList.count >=4) {
             
+            bool writeTemp = NO;
+            
+            if (self.tempVerifyPassCode.length <= 0) {
+                
+                writeTemp = YES;
+            }
+            
+            
+            for (GestureView *gestureView in self.selectViewList) {
+                
+                if (writeTemp) {
+                    
+                    [self.tempVerifyPassCode appendString:[NSString stringWithFormat:@"%ld",gestureView.tag]];
+                    
+                }else{
+                    
+                    [self.verifyPassCode appendString:[NSString stringWithFormat:@"%ld",gestureView.tag]];
+                }
+                
+            }
+            
             self.finish = YES;
+            
+            if (_verifyTwoNum) {
+                
+                
+                if (self.tempVerifyPassCode.length > 0 && self.verifyPassCode.length > 0) {
+                    
+                 
+                    if ([self.tempVerifyPassCode isEqualToString:self.verifyPassCode]) {
+                        
+                        
+                        
+                        GestureError *error = [[GestureError alloc] initErrorCode:PASSCODE_SUCCESS withMessage:@"Success" withPassCode:self.verifyPassCode];
+                        
+                        [self backPage:error];
+                        
+                    }else{
+                        
+                        self.alertTitle.text = @"两次绘制图案不一致，请重新绘制";
+                        
+                        [self clearAllPassCodeStr];
+                        
+                    }
+                    
+                    
+                }else{
+                    
+                    self.alertTitle.text = @"请再次绘制";
+                    
+                }
+ 
+
+            }else{
+                
+                
+                GestureError *error = [[GestureError alloc] initErrorCode:PASSCODE_SUCCESS withMessage:@"Success" withPassCode:self.tempVerifyPassCode];
+    
+                [self backPage:error];
+                
+            }
+            
             
         }else{
             
+            
             self.finish = NO;
+            
+            [self clearAllPassCodeStr];
             
             [self clearAllGuestureBtn];
             
@@ -108,14 +179,25 @@
         
         
     }
-    
+ 
 }
+
 
 
 
 - (void)layoutSubviews{
     
     [super layoutSubviews];
+    
+//    NSLog(@"<-- 6 %s , count = %@-->", __func__, @(count++));
+    
+    
+    [self UIConfig];
+    
+    if (!self.isShowEchoView) {
+        
+        [self.guesEchoView setHidden:YES];
+    }
     
     NSInteger count = self.viewList.count;
 
@@ -193,7 +275,15 @@
         
         [path addLineToPoint:_currentPoint];
         
-        [[UIColor grayColor] set];
+        if (_lineNormalColor) {
+            
+            [_lineNormalColor set];
+            
+        }else{
+            
+            [[UIColor grayColor] set];
+        }
+        
     }
     
     
@@ -210,33 +300,29 @@
 }
 
 
-
--(NSMutableArray *)selectViewList{
+-(void)UIConfig{
     
-    if (!_selectViewList) {
+    
+    if (_isShowLine == YES) {
         
-        _selectViewList = [[NSMutableArray alloc] init];
+        for (GestureView *gestureView in _viewList) {
+            gestureView.selectItemCenterBallColor = _selectItemCenterBallColor;
+        }
+        
+    }else{
+        
+        for (GestureView *gestureView in _viewList) {
+            gestureView.selectItemCenterBallColor = [UIColor clearColor];
+        }
+        _lineNormalColor = [UIColor clearColor];
+        
     }
-    return _selectViewList;
+    
 }
 
 
--(NSMutableArray *)viewList{
-    
-    if (!_viewList) {
-           
-           _viewList = [[NSMutableArray alloc] init];
-       }
-       return _viewList;
-}
--(NSMutableArray *)selectCount{
-    
-    if (!_selectCount) {
-           
-           _selectCount = [[NSMutableArray alloc] init];
-       }
-       return _selectCount;
-}
+
+
 
 - (BOOL)finish{
     
@@ -269,6 +355,34 @@
     [self.selectViewList removeAllObjects];
 }
 
+-(void)clearAllPassCodeStr{
+    
+    [self.tempVerifyPassCode deleteCharactersInRange:NSMakeRange(0, self.tempVerifyPassCode.length)];
+    
+    [self.verifyPassCode deleteCharactersInRange:NSMakeRange(0, self.verifyPassCode.length)];
+}
+
+
+
+
+-(void)backButtonClick{
+    
+    if (_backPage) {
+        
+        GestureError *error = [[GestureError alloc] initErrorCode:PASSCODE_BACKPAGE withMessage:@"back" withPassCode:@""];
+        _backPage(error);
+    }
+    
+}
+
+-(void)backPage:(GestureError *)error{
+    
+    if (_backPage) {
+        
+        _backPage(error);
+    }
+    
+}
 
 - (GuestureEchoView *)guesEchoView{
     
@@ -309,14 +423,86 @@
     return _alertTitle;
 }
 
--(void)backButtonClick{
+- (NSMutableString *)verifyPassCode{
     
-    if (_backPage) {
-        
-        _backPage();
+    if (!_verifyPassCode) {
+        _verifyPassCode = [[NSMutableString alloc] init];
     }
+    return _verifyPassCode;
     
 }
 
+- (NSMutableString *)tempVerifyPassCode{
+    
+    if (!_tempVerifyPassCode) {
+        _tempVerifyPassCode = [[NSMutableString alloc] init];
+    }
+    return _tempVerifyPassCode;
+    
+    
+}
+
+-(NSMutableArray *)selectViewList{
+    
+    if (!_selectViewList) {
+        
+        _selectViewList = [[NSMutableArray alloc] init];
+    }
+    return _selectViewList;
+}
+
+
+-(NSMutableArray *)viewList{
+    
+    if (!_viewList) {
+           
+           _viewList = [[NSMutableArray alloc] init];
+       }
+       return _viewList;
+}
+-(NSMutableArray *)selectCount{
+    
+    if (!_selectCount) {
+           
+           _selectCount = [[NSMutableArray alloc] init];
+       }
+       return _selectCount;
+}
+
+
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{}
+
+
+//- (void)willMoveToSuperview:(nullable UIView *)newSuperview
+//{
+//  NSLog(@"<-- 2 %s , count = %@-->", __func__, @(count++));
+//}
+//
+//- (void)didMoveToSuperview
+//{
+//  NSLog(@"<-- 3 %s , count = %@-->", __func__, @(count++));
+//}
+//
+//- (void)willMoveToWindow:(nullable UIWindow *)newWindow
+//{
+//  NSLog(@"<-- 4/7 %s , count = %@-->", __func__, @(count++));
+//}
+//
+//- (void)didMoveToWindow
+//{
+//  NSLog(@"<-- 5/8 %s , count = %@-->", __func__, @(count++));
+//}
+//
+//
+//- (void)removeFromSuperview
+//{
+//  NSLog(@"<-- 9 %s , count = %@-->", __func__, @(count++));
+//}
+//
+//- (void)dealloc
+//{
+//  NSLog(@"<-- 10 %s , count = %@-->", __func__, @(count++));
+//}
+  
 
 @end

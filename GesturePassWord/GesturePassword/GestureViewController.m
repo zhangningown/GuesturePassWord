@@ -18,14 +18,29 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    GestureLockView *tempView = [[GestureLockView alloc] initWithFrame:self.view.bounds];
+}
+
+
+-(void)viewWillAppear:(BOOL)animated{
     
-    tempView.backPage = ^{
-        
-        [self dismissViewControllerAnimated:YES completion:nil];
-    };
+    [super viewWillAppear:animated];
     
-    [self setValue:tempView forKey:@"view"];
+    GestureLockView *lockView = [[GestureLockView alloc] initWithFrame:self.view.bounds];
+    
+    lockView.verifyTwoNum = YES;
+    
+    lockView.backPage = _backPage;
+    
+//    lockView.lineNormalColor = [UIColor redColor];
+    
+    lockView.isShowLine = YES;
+    
+    lockView.isShowEchoView = YES;
+    
+//    [lockView setSelectItemCenterBallColor:[UIColor blueColor]];
+    
+    [self.view addSubview:lockView];
+    
 }
 
 /*
@@ -37,5 +52,7 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+
 
 @end

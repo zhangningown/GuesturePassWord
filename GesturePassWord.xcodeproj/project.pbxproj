@@ -19,6 +19,7 @@
 		69F39BF524F7939400E3C333 /* GuestureEchoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F39BF424F7939400E3C333 /* GuestureEchoView.m */; };
 		69F39C1724F8D56300E3C333 /* GestureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F39C1624F8D56300E3C333 /* GestureViewController.m */; };
 		69F39C1B24F8D68A00E3C333 /* BackButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F39C1A24F8D68A00E3C333 /* BackButton.m */; };
+		69F4034D2542C2D500D3B8DF /* GestureError.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F4034C2542C2D500D3B8DF /* GestureError.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,8 @@
 		69F39C1624F8D56300E3C333 /* GestureViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GestureViewController.m; sourceTree = "<group>"; };
 		69F39C1924F8D68A00E3C333 /* BackButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BackButton.h; sourceTree = "<group>"; };
 		69F39C1A24F8D68A00E3C333 /* BackButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BackButton.m; sourceTree = "<group>"; };
+		69F4034B2542C2D500D3B8DF /* GestureError.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GestureError.h; sourceTree = "<group>"; };
+		69F4034C2542C2D500D3B8DF /* GestureError.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GestureError.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +96,8 @@
 		69F39C1824F8D5F000E3C333 /* GesturePassword */ = {
 			isa = PBXGroup;
 			children = (
+				69F4034B2542C2D500D3B8DF /* GestureError.h */,
+				69F4034C2542C2D500D3B8DF /* GestureError.m */,
 				69F39C1524F8D56300E3C333 /* GestureViewController.h */,
 				69F39C1624F8D56300E3C333 /* GestureViewController.m */,
 				69F39B5424F62E9900E3C333 /* GestureLockView.h */,
@@ -135,7 +140,7 @@
 		69A9F7AB245524DE002A658C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1140;
+				LastUpgradeCheck = 1210;
 				ORGANIZATIONNAME = zhangning;
 				TargetAttributes = {
 					69A9F7B2245524DE002A658C = {
@@ -181,6 +186,7 @@
 			files = (
 				69F39C1724F8D56300E3C333 /* GestureViewController.m in Sources */,
 				69F39BF524F7939400E3C333 /* GuestureEchoView.m in Sources */,
+				69F4034D2542C2D500D3B8DF /* GestureError.m in Sources */,
 				69F39B5624F62E9900E3C333 /* GestureLockView.m in Sources */,
 				69A9F7BE245524DE002A658C /* ViewController.m in Sources */,
 				69A9F7B8245524DE002A658C /* AppDelegate.m in Sources */,
@@ -239,6 +245,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -297,6 +304,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -330,7 +338,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = C299C2M2ZC;
 				INFOPLIST_FILE = GesturePassWord/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -348,7 +356,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = C299C2M2ZC;
 				INFOPLIST_FILE = GesturePassWord/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "GestureError.h"
 NS_ASSUME_NONNULL_BEGIN
+typedef void(^BackPage)(GestureError *);
 
 @interface GestureViewController : UIViewController
+
+@property(nonatomic,copy)BackPage backPage;
 
 @end
 

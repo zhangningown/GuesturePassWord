@@ -48,7 +48,15 @@
     
     if (_selectStatus) {
         
-        [[UIColor blackColor] set];
+        if (_selectItemCenterBallColor) {
+            
+            [_selectItemCenterBallColor set];
+            
+        }else{
+            
+            [[UIColor blackColor] set];
+        }
+        
         
     }else{
         

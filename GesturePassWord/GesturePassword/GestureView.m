@@ -24,7 +24,6 @@
         
         self.backgroundColor = UIColor.whiteColor;
  
-        NSLog(@"initWithFrame");
 
     }
     
@@ -48,7 +47,6 @@
 
 -(void)drawRect:(CGRect)rect{
     
-    NSLog(@"drawRect");
     
     [super drawRect:rect];
     
@@ -65,6 +63,9 @@
     //最右侧为0
     //逆时针顺时针绘制
     CGContextAddArc(context, self.bounds.size.width/2, self.bounds.size.height/2, self.bounds.size.width/2 - 1, 0, 2*M_PI, 0);
+    
+    self.cirView.selectItemCenterBallColor = _selectItemCenterBallColor;
+    
     
     if (_isPathFill) {
         CGContextDrawPath(context, kCGPathFill);
@@ -84,11 +85,11 @@
 - (void)setNeedsDisplay{
     [super setNeedsDisplay];
     
-    NSLog(@"setNeedsDisplay");
+//    NSLog(@"setNeedsDisplay");
 }
 - (void)setNeedsDisplayInRect:(CGRect)rect{
     [super setNeedsDisplayInRect:rect];
-    NSLog(@"setNeedsDisplayInRect");
+//    NSLog(@"setNeedsDisplayInRect");
 }
 
 - (void)layoutSubviews{

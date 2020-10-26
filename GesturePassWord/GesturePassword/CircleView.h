@@ -11,7 +11,11 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CircleView : UIView
+
 @property(nonatomic,assign)BOOL selectStatus;
+
+@property(nonatomic,strong)UIColor *selectItemCenterBallColor;
+
 @end
 
 NS_ASSUME_NONNULL_END
